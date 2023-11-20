@@ -1,0 +1,28 @@
+Basic example of text summarization using Python with the `gensim` library and including the removal of stop words:
+
+```python
+import gensim
+from gensim.summarization import summarize
+from gensim.parsing.preprocessing import remove_stopwords
+
+# Step 1: Data Collection (Assuming you have a document for summarization)
+document = """
+Natural Language Processing (NLP) is a field of artificial intelligence that focuses on the interaction 
+between computers and humans using natural language. It involves the development of algorithms and models 
+to enable machines to understand, interpret, and generate human-like text. NLP has various applications 
+such as sentiment analysis, text summarization, and speech recognition.
+"""
+
+# Step 2: Text Preprocessing
+preprocessed_text = remove_stopwords(document)
+
+# Step 3: Text Summarization
+summary = summarize(preprocessed_text)
+
+# Step 4: Output
+print("Original Document:\n", document)
+print("\nPreprocessed Text:\n", preprocessed_text)
+print("\nSummary:\n", summary)
+```
+
+This example removes stop words using `remove_stopwords` from the `gensim` library before applying the text summarization with `summarize`.
