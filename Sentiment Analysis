@@ -6,6 +6,57 @@ Sentiment analysis example using a small dataset and basic code:
 
 Let's create a small dataset with movie reviews and associated sentiments:
 
+
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score, classification_report
+
+# Step 1: Data Collection
+data = {
+    'text': ["I loved the movie! The plot was amazing.",
+             "The acting was terrible, and the story was boring.",
+             "It was an okay film. Not too bad, but not great either."],
+    'sentiment': ['positive', 'negative', 'neutral']
+}
+df = pd.DataFrame(data)
+
+# Step 2: Text Preprocessing
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(df['text'])
+
+# Map sentiment labels to numerical values
+sentiment_mapping = {'positive': 1, 'negative': 0, 'neutral': 2}
+y = df['sentiment'].map(sentiment_mapping)
+
+# Step 3: Model Training
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+classifier = MultinomialNB()
+classifier.fit(X_train, y_train)
+
+# Step 4: Evaluation
+y_pred = classifier.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy}")
+print("Classification Report:\n", classification_report(y_test, y_pred))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```python
 import pandas as pd
 
